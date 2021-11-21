@@ -168,30 +168,31 @@ Se simuló 1000 veces el puerto con tiempo limite de 24 horas, reseteandolo cada
 
 Este resultado se da con un solo remolcador y 3 muelles el cual podemos evidenciar en este gráfico :
 
-images/t1_d3_24h_1.png
+![](images/t1_d3_24h_1.png)
 
 Si aumentamos el número de remolcadores para igualar la cantidad de muelles, se nos reduce un poco el tiempo de espera a un aproximado de 15 minutos. Además de que se reduce el máximo tiempo de espera considerablemente como se ve en el siguiente gráfico:
 
-images/t3_d3_24h_1.png
+![](images/t3_d3_24h_1.png)
 
 Probé un caso más con este concepto, aumento la cantidad de remolcadores al doble de la cantidad de muelles y el resultado no muestra grandes cambios.
 Se mantiene el tiempo de espera en un aproximado de 15 minutos:
-images/t6_d3_24h_1.png
+
+![](images/t6_d3_24h_1.png)
 
 ### 2da vía
 Al igual que en la primera vía se ajustaron de igual manera los parámetros(cambiandose end_loading_time por start_loading_time en el script port.py ), obteniéndose las siguientes gráficas y resultados.
 
 En la gráfica número 1 nos da como resultado que la media de tiempo esperado es de aproximadamente unas 14 horas. Tambien podemos apreciar como la media de tiempo por tipo de barco se encasilla bastante en su tiempo de carga.
 
-images/t1_d3_24h_2.png
+![](images/t1_d3_24h_2.png)
 
 Igualando la cantidad de remolcadores a la cantidad de muelles obtenemos la siguiente gráfica en la que podemos apreciar que el tiempo de espera promedio se mantiene en el mismo valor y sin haber mucho cambio con respecto a la modificación del número de remolcadores:
 
-images/t3_d3_24h_2.png
+![](images/t3_d3_24h_2.png)
 
 Para la última comparativa, duplicamos la cantidad de remolcadores para determinar si afecta de alguna manera los resultados. Pero como pueden apreciar, en nuestra última gráfica no se aprecian cambios significativos
 
-images/t6_d3_24h_2.png
+![](images/t6_d3_24h_2.png)
 
 Es por esta razón que me decanto por la primera vía en aras de presentar un trabajo más completo y que aporte más información acerca del problema en cuesión.
 ambas versiones estarán en sus respectivas ramas, siendo la primera la que se presentará en la rama principal.
