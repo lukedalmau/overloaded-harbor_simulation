@@ -57,7 +57,7 @@ El manejo de dichas variables se hace de forma interna de la misma forma que el 
 
 El tiempo de espera en los muelles lo tomaremos como el tiempo en que el barco o tanquero está sin hacer nada esperando al remolcador para que lo recoja.
 
-Lo tomo así puesto que el tiempo de espera desde que arriba al muelle hasta que sale está condicionado por el tiempo de carga de cada tipo de barco así que no aporta mucho escogerlo desde que entra al muelle. Pero independientemente del tipo de barco que sea si nos conviene escoger el tiempo de espera a partir de que el barco termina de cargarse en el muelle, puesto que podemos centrarnos en determinar el tiempo medio de espera de cualquier tipo de barco y si es mejorable o no agregando más remolcadores o construyendo más muelles(o demoliendo algun muelle o deshaciendonos de algun remolcador, nadie sabe ).
+Lo tomo así puesto que el tiempo de espera desde que arriba al muelle hasta que sale está condicionado por el tiempo de carga de cada tipo de barco así que no aporta mucho escogerlo desde que entra al muelle. Pero, independientemente del tipo de barco que sea, si nos conviene escoger el tiempo de espera a partir de que el barco termina de cargarse en el muelle, puesto que podemos centrarnos en determinar el tiempo medio de espera de cualquier tipo de barco y si es mejorable o no agregando más remolcadores o construyendo más muelles(o demoliendo algun muelle o deshaciendonos de algun remolcador, nadie sabe ).
 
 *** Es importante aclarar que ambas vias las puede ver en este informe
 
@@ -168,30 +168,31 @@ Se simuló 1000 veces el puerto con tiempo limite de 24 horas, reseteandolo cada
 
 Este resultado se da con un solo remolcador y 3 muelles el cual podemos evidenciar en este gráfico :
 
-images/t1_d3_24h_1.png
+![](images/t1_d3_24h_1.png)
 
 Si aumentamos el número de remolcadores para igualar la cantidad de muelles, se nos reduce un poco el tiempo de espera a un aproximado de 15 minutos. Además de que se reduce el máximo tiempo de espera considerablemente como se ve en el siguiente gráfico:
 
-images/t3_d3_24h_1.png
+![](images/t3_d3_24h_1.png)
 
 Probé un caso más con este concepto, aumento la cantidad de remolcadores al doble de la cantidad de muelles y el resultado no muestra grandes cambios.
 Se mantiene el tiempo de espera en un aproximado de 15 minutos:
-images/t6_d3_24h_1.png
+
+![](images/t6_d3_24h_1.png)
 
 ### 2da vía
 Al igual que en la primera vía se ajustaron de igual manera los parámetros(cambiandose end_loading_time por start_loading_time en el script port.py ), obteniéndose las siguientes gráficas y resultados.
 
 En la gráfica número 1 nos da como resultado que la media de tiempo esperado es de aproximadamente unas 14 horas. Tambien podemos apreciar como la media de tiempo por tipo de barco se encasilla bastante en su tiempo de carga.
 
-images/t1_d3_24h_2.png
+![](images/t1_d3_24h_2.png)
 
 Igualando la cantidad de remolcadores a la cantidad de muelles obtenemos la siguiente gráfica en la que podemos apreciar que el tiempo de espera promedio se mantiene en el mismo valor y sin haber mucho cambio con respecto a la modificación del número de remolcadores:
 
-images/t3_d3_24h_2.png
+![](images/t3_d3_24h_2.png)
 
 Para la última comparativa, duplicamos la cantidad de remolcadores para determinar si afecta de alguna manera los resultados. Pero como pueden apreciar, en nuestra última gráfica no se aprecian cambios significativos
 
-images/t6_d3_24h_2.png
+![](images/t6_d3_24h_2.png)
 
 Es por esta razón que me decanto por la primera vía en aras de presentar un trabajo más completo y que aporte más información acerca del problema en cuesión.
 ambas versiones estarán en sus respectivas ramas, siendo la primera la que se presentará en la rama principal.
