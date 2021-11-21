@@ -105,7 +105,7 @@ Para la completitud de la simulacion tambien se implementaron los scripts :
         * Large_Load_Time( Variable aleatoria para el tiempo que demora en cargarse un barco grande)
         * tow_to_port ( variable aleatoria para el tiempo que demora el remolcador en trasladar hacia el puerto)
         * tow_to_dock(variable aleatoria para el tiempo que demora el remolcador en trasladar hacia el muelle correspondiente)
-        * free_tug_movement( Variable aleatoria para el tiempo que demora el remolcador en moverse libremente entre el muelle y el puerto o viceversa)
+        * free_tug_movement( Variable aleatoria para el tiempo que demora el remolcador en moverse libremente entre el muelle y el puerto )
 
 ## Modelo de Simulación de Eventos Discretos desarrollado para resolver el problema
 
