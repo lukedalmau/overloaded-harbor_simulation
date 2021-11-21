@@ -69,23 +69,23 @@ sims=[]
 for _ in range(1000):
     
     port.run(TIME_LIMIT)
-    sim_mean = sum([ship.tow_to_port_time-ship.start_loading_time for ship in port.history])/len(port.history)
+    sim_mean = sum([ship.tow_to_port_time-ship.end_loading_time for ship in port.history])/len(port.history)
     #print(sim_mean)
     sims.append(sim_mean)
     X.extend([ship.departure_time for ship in port.history])
     Y.extend([ship.tow_to_port_time -
-             ship.start_loading_time for ship in port.history])
+             ship.end_loading_time for ship in port.history])
     
     ships_type0_X = [ship.departure_time for ship in port.history if ship.typeOfShip == 0]
     ships_type1_X = [ship.departure_time for ship in port.history if ship.typeOfShip == 1]
     ships_type2_X = [ship.departure_time for ship in port.history if ship.typeOfShip == 2]
     
     ships_type0_Y = [ship.tow_to_port_time -
-                     ship.start_loading_time for ship in port.history if ship.typeOfShip == 0]
+                     ship.end_loading_time for ship in port.history if ship.typeOfShip == 0]
     ships_type1_Y = [ship.tow_to_port_time -
-                     ship.start_loading_time for ship in port.history if ship.typeOfShip == 1]
+                     ship.end_loading_time for ship in port.history if ship.typeOfShip == 1]
     ships_type2_Y = [ship.tow_to_port_time -
-                     ship.start_loading_time for ship in port.history if ship.typeOfShip == 2]
+                     ship.end_loading_time for ship in port.history if ship.typeOfShip == 2]
 
     ships_by_type[0][0].extend(ships_type0_X)
     ships_by_type[0][1].extend(ships_type0_Y)
@@ -98,7 +98,7 @@ for _ in range(1000):
 
 
 all_sim_mean =  sum(sims)/len(sims)
-print("All simulations mean : ",all_sim_mean)
+print("All simulations mean : ",all_sim_mean,"hours")
 print("Min : ",min(sims),"Max : ", max(sims))
 
 mean0X = sum(ships_by_type[0][0])/len(ships_by_type[0][0])
