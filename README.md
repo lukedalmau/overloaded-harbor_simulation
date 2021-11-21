@@ -57,7 +57,7 @@ El manejo de dichas variables se hace de forma interna de la misma forma que el 
 
 El tiempo de espera en los muelles lo tomaremos como el tiempo en que el barco o tanquero está sin hacer nada esperando al remolcador para que lo recoja.
 
-Lo tomo así puesto que el tiempo de espera desde que arriba al muelle hasta que sale está condicionado por el tiempo de carga de cada tipo de barco así que no aporta mucho escogerlo desde que entra al muelle. Pero independientemente del tipo de barco que sea si nos conviene escoger el tiempo de espera a partir de que el barco termina de cargarse en el muelle, puesto que podemos centrarnos en determinar el tiempo medio de espera de cualquier tipo de barco y si es mejorable o no agregando más remolcadores o construyendo más muelles(o demoliendo algun muelle o deshaciendonos de algun remolcador, nadie sabe ).
+Lo tomo así puesto que el tiempo de espera desde que arriba al muelle hasta que sale está condicionado por el tiempo de carga de cada tipo de barco así que no aporta mucho escogerlo desde que entra al muelle. Pero, independientemente del tipo de barco que sea, si nos conviene escoger el tiempo de espera a partir de que el barco termina de cargarse en el muelle, puesto que podemos centrarnos en determinar el tiempo medio de espera de cualquier tipo de barco y si es mejorable o no agregando más remolcadores o construyendo más muelles(o demoliendo algun muelle o deshaciendonos de algun remolcador, nadie sabe ).
 
 *** Es importante aclarar que ambas vias las puede ver en este informe
 
