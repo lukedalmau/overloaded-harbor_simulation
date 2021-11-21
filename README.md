@@ -8,18 +8,8 @@
 
 ### 2.Puerto Sobrecargado (Overloaded Harbor)
 
-En un puerto de supertanqueros que cuenta con 3 muelles y un remolcador
-para la descarga de estos barcos de manera simultánea se desea conocer el tiempo
-promedio de espera de los barcos para ser cargados en el puerto.
-El puerto cuenta con un bote remolcador disponible para asistir a los tan-
-queros. Los tanqueros de cualquier tamaño necesitan de un remolcador para
-aproximarse al muelle desde el puerto y para dejar el muelle de vuelta al puerto.
-El tiempo de intervalo de arribo de cada barco distribuye mediante una fun-
-ción exponencial con λ = 8 horas. Existen tres tamaños distintos de tanqueros:
-pequeño, mediano y grande, la probabilidad correspondiente al tamaño de cada
-tanquero se describe en la tabla siguiente. El tiempo de carga de cada tanquero
-depende de su tamaño y los parámetros de distribución normal que lo representa
-también se describen en la tabla siguiente.
+En un puerto de supertanqueros que cuenta con 3 muelles y un remolcador para la descarga de estos barcos de manera simultánea se desea conocer el tiempo promedio de espera de los barcos para ser cargados en el puerto.
+El puerto cuenta con un bote remolcador disponible para asistir a los tanqueros. Los tanqueros de cualquier tamaño necesitan de un remolcador para aproximarse al muelle desde el puerto y para dejar el muelle de vuelta al puerto. El tiempo de intervalo de arribo de cada barco distribuye mediante una función exponencial con λ = 8 horas. Existen tres tamaños distintos de tanqueros: pequeño, mediano y grande, la probabilidad correspondiente al tamaño de cada tanquero se describe en la tabla siguiente. El tiempo de carga de cada tanquero depende de su tamaño y los parámetros de distribución normal que lo representa también se describen en la tabla siguiente.
 
 Tamaño | Probabilidad de Arribo | Tiempo de Carga|
 :----- | :------------------    | :------------  |
@@ -27,28 +17,7 @@ Pequeño | 0.25 | µ = 9, σ^2 = 1
 Mediano | 0.25 | µ = 12, σ^2 = 2
 Grande | 0.5 | µ = 18, σ^2 = 3
 
-De manera general, cuando un tanquero llega al puerto, espera en una cola
-(virtual) hasta que exista un muelle vacı́o y que un remolcador esté disponible
-para atenderle. Cuando el remolcador está disponible lo asiste para que pueda
-comenzar su carga, este proceso demora un tiempo que distribuye exponencial
-con λ = 2 horas. El proceso de carga comienza inmediatamente después de que
-el barco llega al muelle. Una vez terminado este proceso es necesaria la asistencia
-del remolcador (esperando hasta que esté disponible) para llevarlo de vuelta al
-puerto, el tiempo de esta operación distribuye de manera exponencial con λ = 1
-hora. El traslado entre el puerto y un muelle por el remolcador sin tanquero
-distribuye exponencial con λ = 15 minutos.
-Cuando el remolcador termina la operación de aproximar un tanquero al
-muelle, entonces lleva al puerto al primer barco que esperaba por salir, en caso de
-que no exista barco por salir y algún muelle esté vacı́o, entonces el remolcador se
-dirige hacia el puerto para llevar al primer barco en espera hacia el muelle vacı́o;
-en caso de que no espere ningún barco, entonces el remolcador esperará por
-2algún barco en un muelle para llevarlo al puerto. Cuando el remolcador termina
-la operación de llevar algún barco al puerto, este inmediatamente lleva al primer
-barco esperando hacia el muelle vacı́o. En caso de que no haya barcos en los
-muelles, ni barcos en espera para ir al muelle, entonces el remolcador se queda
-en el puerto esperando por algún barco para llevar a un muelle.
-Simule completamente el funcionamiento del puerto. Determine el tiempo
-promedio de espera en los muelles.
+De manera general, cuando un tanquero llega al puerto, espera en una cola (virtual) hasta que exista un muelle vacı́o y que un remolcador esté disponible para atenderle. Cuando el remolcador está disponible lo asiste para que pueda comenzar su carga, este proceso demora un tiempo que distribuye exponencial con λ = 2 horas. El proceso de carga comienza inmediatamente después de que el barco llega al muelle. Una vez terminado este proceso es necesaria la asistencia del remolcador (esperando hasta que esté disponible) para llevarlo de vuelta al puerto, el tiempo de esta operación distribuye de manera exponencial con λ = 1 hora. El traslado entre el puerto y un muelle por el remolcador sin tanquero distribuye exponencial con λ = 15 minutos. Cuando el remolcador termina la operación de aproximar un tanquero al muelle, entonces lleva al puerto al primer barco que esperaba por salir, en caso de que no exista barco por salir y algún muelle esté vacı́o, entonces el remolcador se dirige hacia el puerto para llevar al primer barco en espera hacia el muelle vacı́o; en caso de que no espere ningún barco, entonces el remolcador esperará por 2algún barco en un muelle para llevarlo al puerto. Cuando el remolcador termina la operación de llevar algún barco al puerto, este inmediatamente lleva al primer barco esperando hacia el muelle vacı́o. En caso de que no haya barcos en los muelles, ni barcos en espera para ir al muelle, entonces el remolcador se queda en el puerto esperando por algún barco para llevar a un muelle. Simule completamente el funcionamiento del puerto. Determine el tiempo promedio de espera en los muelles.
 
 ## Principales Ideas seguidas para la solución del problema
 
@@ -107,7 +76,7 @@ Para la completitud de la simulación también se implementaron los scripts :
         * Event(como clase de la que heredan todos los eventos y que basicamente se compara con otros eventos utilizando su campo tiempo)
 
         * Ship_Arrival_Event (Evento del arribo de un barco. El puerto inicializa con un evento de este tipo. Al procesarse se crea y le hace push a un evento de tipo Tow_to_Dock si las condiciones lo permiten y además también le hace push a un evento de su mismo tipo si el tiempo en el que debe llegar no excede el tiempo límite de trabajo del puerto )
-         
+        
         * Tow_To_Dock_Event(Evento de traslado que setea las variables del muelle al que se esta dirigiendo y además pushea 2 eventos uno para el muelle para empezar a cargar el barco y otro para el remolcador para que revise si hay algún barco que ya haya terminado de cargarse )
 
         * Tow_To_Port_Event( Evento de traslado que setea las variables del barco que se va y revisa si se puede llevar algun otro barco de la cola para ser atendidos en uno de los muelles)
@@ -116,9 +85,9 @@ Para la completitud de la simulación también se implementaron los scripts :
 
         * End_Loading_Ship_Event(Evento de muelle que avisa y setea sus variables para establecer que terminó de cargar su barco designado y que esta disponible para ser recogido su barco)
 
-        * Check_Finished_Ship_Event (Evento de remolcador que revisa por los muelles si algún barco terminó de cargar. En caso de que todos los muelles tengan barcos cargándose entonces espera, si hay algun muelle libre entonces aprovecha para ir a recoger a alguno de los barcos en cola en caso de que hayan barcos en la cola. En caso de que no hayan barcos en la cola pero si hayan muelles cargando, espera en el muelle y si no hay barcos cargándose en el muelle ni esperando a ser recogidos en los muelles(es decir que los muelles están vacíos) y no hay barcos en cola para ser atendidos entonces el remolcador espera en el puerto)
+        * Check_Finished_Ship_Event (Evento de remolcador que revisa por los muelles si algún barco terminó de cargar. En caso de que todos los muelles tengan barcos cargándose entonces espera, si hay algún muelle libre entonces aprovecha para ir a recoger a alguno de los barcos en cola en caso de que hayan barcos en la cola. En caso de que no hayan barcos en la cola pero si hayan muelles cargando, espera en el muelle y si no hay barcos cargándose en el muelle ni esperando a ser recogidos en los muelles(es decir que los muelles están vacíos) y no hay barcos en cola para ser atendidos entonces el remolcador espera en el puerto)
 
-        * Wait_Ship_Arrival_Event(Evento de remolcador que es necesario para simular el traslado del remolcador de los muelles hacia el puerto y setearlo como que el remolcador esta desocupado una vez se maneje este evento)
+        * Wait_Ship_Arrival_Event(Evento de remolcador que es necesario para simular el traslado del remolcador de los muelles hacia el puerto y setearlo como que el remolcador está desocupado una vez se maneje este evento)
 
 * heap.py
 
@@ -180,9 +149,9 @@ Se mantiene el tiempo de espera en un aproximado de 15 minutos:
 ![](images/t6_d3_24h_1.png)
 
 ### 2da vía
-Al igual que en la primera vía se ajustaron de igual manera los parámetros(cambiandóse end_loading_time por start_loading_time en el script port.py ), obteniéndose las siguientes gráficas y resultados.
+Al igual que en la primera vía se ajustaron de igual manera los parámetros(cambiándose end_loading_time por start_loading_time en el script port.py ), obteniéndose las siguientes gráficas y resultados.
 
-En la gráfica número 1 nos da como resultado que la media de tiempo esperado es de aproximadamente unas 14 horas. Tambien podemos apreciar como la media de tiempo por tipo de barco se encasilla bastante en su tiempo de carga.
+En la gráfica número 1 nos da como resultado que la media de tiempo esperado es de aproximadamente unas 14 horas. También podemos apreciar como la media de tiempo por tipo de barco se encasilla bastante en su tiempo de carga.
 
 ![](images/t1_d3_24h_2.png)
 
@@ -194,7 +163,7 @@ Para la última comparativa, duplicamos la cantidad de remolcadores para determi
 
 ![](images/t6_d3_24h_2.png)
 
-Es por esta razón que me decanto por la primera vía en aras de presentar un trabajo más completo y que aporte más información acerca del problema en cuesión.
+Es por esta razón que me decanto por la primera vía en aras de presentar un trabajo más completo y que aporte más información acerca del problema en cuestión.
 ambas versiones estarán en sus respectivas ramas, siendo la primera la que se presentará en la rama principal.
 
 ## El enlace al repositorio del proyecto en Github
