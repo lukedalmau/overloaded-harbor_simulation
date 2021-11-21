@@ -52,23 +52,23 @@ promedio de espera en los muelles.
 
 ## Principales Ideas seguidas para la solución del problema
 
-Utilicé la idea de un modelo de un solo servidor adaptado al problema en cuestión. Muchas de la variables propuestas en el modelo de un solo servidor se toman implicitamente como variables del problema.
+Utilicé la idea de un modelo de un solo servidor adaptado al problema en cuestión. Muchas de la variables propuestas en el modelo de un solo servidor se toman implícitamente como variables del problema.
 El manejo de dichas variables se hace de forma interna de la misma forma que el modelo de un solo servidor.
 
 El tiempo de espera en los muelles lo tomaremos como el tiempo en que el barco o tanquero está sin hacer nada esperando al remolcador para que lo recoja.
 
-Lo tomo así puesto que el tiempo de espera desde que arriba al muelle hasta que sale está condicionado por el tiempo de carga de cada tipo de barco así que no aporta mucho escogerlo desde que entra al muelle. Pero, independientemente del tipo de barco que sea, si nos conviene escoger el tiempo de espera a partir de que el barco termina de cargarse en el muelle, puesto que podemos centrarnos en determinar el tiempo medio de espera de cualquier tipo de barco y si es mejorable o no agregando más remolcadores o construyendo más muelles(o demoliendo algun muelle o deshaciendonos de algun remolcador, nadie sabe ).
+Lo tomo así puesto que el tiempo de espera desde que arriba al muelle hasta que sale está condicionado por el tiempo de carga de cada tipo de barco así que no aporta mucho escogerlo desde que entra al muelle. Pero, independientemente del tipo de barco que sea, sí nos conviene escoger el tiempo de espera a partir de que el barco termina de cargarse en el muelle, puesto que podemos centrarnos en determinar el tiempo medio de espera de cualquier tipo de barco y si es mejorable o no agregando más remolcadores o construyendo más muelles(o demoliendo algún muelle o deshaciéndonos de algún remolcador, nadie sabe ).
 
-*** Es importante aclarar que ambas vias las puede ver en este informe
+*** Es importante aclarar que ambas vías las puede ver en este informe
 
 *En la implementación de la resolución del problema tenemos unas variables globales TUG_AMOUNT , DOCK_AMOUNT y TIME_LIMIT para poder simular a conveniencia diversos escenarios con respecto a estas variables.*
 
 
 ## Modelo de Simulación de Eventos Discretos desarrollado para resolver el problema
 
-Primero se debe determinar el tiempo de espera promedio en los muelles. Para ello se configuro una clase Ship que representa el barco que se va a cargar en el puerto. Dicha clase tiene varios campos que indican el tiempo en que el barco pasa cada una de las etapas desde que llega al puerto hasta que se va del mismo.
+Primero se debe determinar el tiempo de espera promedio en los muelles. Para ello se configuró una clase Ship que representa el barco que se va a cargar en el puerto. Dicha clase tiene varios campos que indican el tiempo en que el barco pasa cada una de las etapas desde que llega al puerto hasta que se va del mismo.
 
-Para nuestro problema en cuestión solo necesitamos utilizar 2 de estos campos. El tiempo en que llega al muelle y el tiempo en que se va de este.
+Para nuestro problema en cuestión solo necesitamos utilizar 2 de estos campos. El tiempo en que termina de cargarse y el tiempo en que se va de este.(Como opcional utilizamos el tiempo en que llega al muelle en la 2da vía)
 
 Dichos campos forman parte de la clase Ship y son las siguientes:
 
@@ -76,11 +76,11 @@ Dichos campos forman parte de la clase Ship y son las siguientes:
 
 * end_loading_time: Tiempo en que el barco termina de cargarse en el muelle.
 
-* (2da via) start_loading_time: Tiempo en que el barco empieza a cargarse en el muelle(En otras palabras en cuanto llega al muelle).
+* (2da vía) start_loading_time: Tiempo en que el barco empieza a cargarse en el muelle(En otras palabras en cuanto llega al muelle).
 
 *La Clase Ship posee otras variables para poder evaluar otros tiempos objetivos como fuese el tiempo total que se demora un barco desde que llega hasta que sale del puerto o el tiempo que demora un barco en un muelle luego de completar su carga*
 
-Para la completitud de la simulacion tambien se implementaron los scripts :
+Para la completitud de la simulación también se implementaron los scripts :
 
 * dock.py
 
@@ -98,25 +98,25 @@ Para la completitud de la simulacion tambien se implementaron los scripts :
 
     - Contiene las clases :
 
-        * Port (Clase que simula todo el puerto. En ella se tiene la lista de muelles y la lista de remolcadores al igual que el tiempo y otras variables para llevar el estado actual del puerto, como lo son la lista de muelles que terminaron de cargar a los barcos y la lista de barcos que esperan por ser atendidos, entre otros)
+        * Port (Clase que simula todo el puerto. En ella se tiene la lista de muelles y la lista de remolcadores al igual que el tiempo y otras variables para llevar el estado actual del puerto, como lo son la lista de muelles que terminaron de cargar a los barcos y la lista de barcos que esperan por ser atendidos, entre otras)
 
 * events.py
 
     - Contiene las clases
 
-        * Event(como clase abstracta de la que heredan todos los eventos y que basicamente se compara con otros eventos utilizando su campo tiempo)
+        * Event(como clase de la que heredan todos los eventos y que basicamente se compara con otros eventos utilizando su campo tiempo)
 
-        * Ship_Arrival_Event (Evento del arribo de un barco. El puerto inicializa con un evento de este tipo. Al procesarse se crea le hace push a un evento de tipo Tow_to_Dock si las condiciones lo permiten y ademas tambien le hace push a un evento de su mismo tipo si el tiempo en el que debe llegar no excede el tiempo limite de trabajo del puerto )
+        * Ship_Arrival_Event (Evento del arribo de un barco. El puerto inicializa con un evento de este tipo. Al procesarse se crea y le hace push a un evento de tipo Tow_to_Dock si las condiciones lo permiten y además también le hace push a un evento de su mismo tipo si el tiempo en el que debe llegar no excede el tiempo límite de trabajo del puerto )
          
-        * Tow_To_Dock_Event(Evento de traslado que setea las variables del muelle al que se esta dirigiendo y ademas pushea 2 eventos uno para el muelle para empezar a cargar el barco y otro para el remolcador para que revise si hay algun barco que ya haya terminado de cargarse )
+        * Tow_To_Dock_Event(Evento de traslado que setea las variables del muelle al que se esta dirigiendo y además pushea 2 eventos uno para el muelle para empezar a cargar el barco y otro para el remolcador para que revise si hay algún barco que ya haya terminado de cargarse )
 
-        * Tow_To_Port_Event( Evento de traslado que setea las variables del barco que se va y revisa si se puede llevar algun otro barco de la cola para ser atendidos a uno de los muelles)
+        * Tow_To_Port_Event( Evento de traslado que setea las variables del barco que se va y revisa si se puede llevar algun otro barco de la cola para ser atendidos en uno de los muelles)
 
         * Start_Loading_Ship_Event (Evento de muelles que inicia el proceso de carga de un barco en dependencia de su tamaño)
 
-        * End_Loading_Ship_Event(Evento de muelle que avisa y setea sus variables para establecer que termino de cargar su barco designado y que esta disponible para ser recogido su barco)
+        * End_Loading_Ship_Event(Evento de muelle que avisa y setea sus variables para establecer que terminó de cargar su barco designado y que esta disponible para ser recogido su barco)
 
-        * Check_Finished_Ship_Event (Evento de remolcador que revisa por los muelles si algun barco terminó de cargar. En caso de que todos los muelles tengan barcos cargandose entonces espera, si hay algun muelle libre entonces aprovecha para ir a recoger a alguno de los barcos en cola en caso de que hayan barcos en la cola. En caso de que no hayan barcos en la cola pero si hayan muelles cargando espera en el muelle y si no hay barcos cargandose en el muelle ni esperando a ser recogidos en los muelles(es decir que los muelles estan vacios) y no hay barcos en cola para ser atendidos. El remolcador espera en el puerto)
+        * Check_Finished_Ship_Event (Evento de remolcador que revisa por los muelles si algún barco terminó de cargar. En caso de que todos los muelles tengan barcos cargándose entonces espera, si hay algun muelle libre entonces aprovecha para ir a recoger a alguno de los barcos en cola en caso de que hayan barcos en la cola. En caso de que no hayan barcos en la cola pero si hayan muelles cargando, espera en el muelle y si no hay barcos cargándose en el muelle ni esperando a ser recogidos en los muelles(es decir que los muelles están vacíos) y no hay barcos en cola para ser atendidos entonces el remolcador espera en el puerto)
 
         * Wait_Ship_Arrival_Event(Evento de remolcador que es necesario para simular el traslado del remolcador de los muelles hacia el puerto y setearlo como que el remolcador esta desocupado una vez se maneje este evento)
 
@@ -164,7 +164,7 @@ Para la completitud de la simulacion tambien se implementaron los scripts :
 
 ### 1ra vía
 
-Se simuló 1000 veces el puerto con tiempo limite de 24 horas, reseteandolo cada vez, y la media obtenida de todas las medias de cada una de las simulaciones da un aproximado de 20 minutos de espera.
+Se simuló 1000 veces el puerto con tiempo límite de 24 horas, reseteandolo cada vez, y la media obtenida de todas las medias de cada una de las simulaciones da un aproximado de 20 minutos de espera.
 
 Este resultado se da con un solo remolcador y 3 muelles el cual podemos evidenciar en este gráfico :
 
@@ -174,13 +174,13 @@ Si aumentamos el número de remolcadores para igualar la cantidad de muelles, se
 
 ![](images/t3_d3_24h_1.png)
 
-Probé un caso más con este concepto, aumento la cantidad de remolcadores al doble de la cantidad de muelles y el resultado no muestra grandes cambios.
+Probé un caso más con este concepto, aumenté la cantidad de remolcadores al doble de la cantidad de muelles y el resultado no muestra grandes cambios.
 Se mantiene el tiempo de espera en un aproximado de 15 minutos:
 
 ![](images/t6_d3_24h_1.png)
 
 ### 2da vía
-Al igual que en la primera vía se ajustaron de igual manera los parámetros(cambiandose end_loading_time por start_loading_time en el script port.py ), obteniéndose las siguientes gráficas y resultados.
+Al igual que en la primera vía se ajustaron de igual manera los parámetros(cambiandóse end_loading_time por start_loading_time en el script port.py ), obteniéndose las siguientes gráficas y resultados.
 
 En la gráfica número 1 nos da como resultado que la media de tiempo esperado es de aproximadamente unas 14 horas. Tambien podemos apreciar como la media de tiempo por tipo de barco se encasilla bastante en su tiempo de carga.
 
