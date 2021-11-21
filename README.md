@@ -52,9 +52,9 @@ promedio de espera en los muelles.
 
 ## Principales Ideas seguidas para la solución del problema
 
-Primero se debe determinar el tiempo de espera promedio en los muelles.Para ello se configuro una clase Ship que representa el barco que se va a cargar en el puerto. Dicha clase tiene varios campos que indican el tiempo en que el barco pasa cada una de las etapas desde que llega al puerto hasta que se va del mismo.
+Primero se debe determinar el tiempo de espera promedio en los muelles. Para ello se configuro una clase Ship que representa el barco que se va a cargar en el puerto. Dicha clase tiene varios campos que indican el tiempo en que el barco pasa cada una de las etapas desde que llega al puerto hasta que se va del mismo.
 
-Para nuestro problema en cuestión solo necesitamos utilizar 2 de eestos campos. El tiempo en que llega al muelle y el tiempo en en que se va de este.
+Para nuestro problema en cuestión solo necesitamos utilizar 2 de estos campos. El tiempo en que llega al muelle y el tiempo en que se va de este.
 
 Dichos campos forman parte de la clase Ship y son las siguientes:
 
@@ -117,3 +117,4 @@ El manejo de dichas variables se hace de forma interna de la misma forma que el 
 
 
 ## El enlace al repositorio del proyecto en Github
+https://github.com/lukedalmau/overloaded-harbor_simulation
