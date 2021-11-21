@@ -1,4 +1,6 @@
-from random import seed
+
+import matplotlib.pyplot as plt
+
 from typing import List
 from events import Ship_Arrival_Event
 from ship import Ship
@@ -6,6 +8,11 @@ from tug import Tug
 from dock import Dock
 from problem_random_vars import ship_arrival, ship_type,Small_Load_Time, Medium_Load_Time, Large_Load_Time
 from heap import Heap
+
+
+TUG_AMOUNT = 1
+DOCK_AMOUNT = 3
+TIME_LIMIT = 24
 
 
 class Port:
@@ -49,15 +56,65 @@ class Port:
         self.event_list = Heap([Ship_Arrival_Event(self.time + self.ship_arrival())])
 
 
-port = Port([Tug(0),Tug(1) ],[Dock(0),Dock(1),Dock(2), Dock(3)])
+port = Port([Tug(i) for i in range(TUG_AMOUNT)], [Dock(i) for i in range(DOCK_AMOUNT)])
+
+
+X = []
+Y = []
+
+ships_by_type = [[[],[]],[[],[]],[[],[]]]
 
 sims=[]
 
 for _ in range(1000):
     
-    port.run(7*24)
+    port.run(TIME_LIMIT)
     sim_mean = sum([ship.tow_to_port_time-ship.start_loading_time for ship in port.history])/len(port.history)
-    print(sim_mean)
+    #print(sim_mean)
     sims.append(sim_mean)
+    X.extend([ship.departure_time for ship in port.history])
+    Y.extend([ship.tow_to_port_time -
+             ship.start_loading_time for ship in port.history])
+    
+    ships_type0_X = [ship.departure_time for ship in port.history if ship.typeOfShip == 0]
+    ships_type1_X = [ship.departure_time for ship in port.history if ship.typeOfShip == 1]
+    ships_type2_X = [ship.departure_time for ship in port.history if ship.typeOfShip == 2]
+    
+    ships_type0_Y = [ship.tow_to_port_time -
+                     ship.start_loading_time for ship in port.history if ship.typeOfShip == 0]
+    ships_type1_Y = [ship.tow_to_port_time -
+                     ship.start_loading_time for ship in port.history if ship.typeOfShip == 1]
+    ships_type2_Y = [ship.tow_to_port_time -
+                     ship.start_loading_time for ship in port.history if ship.typeOfShip == 2]
+
+    ships_by_type[0][0].extend(ships_type0_X)
+    ships_by_type[0][1].extend(ships_type0_Y)
+
+    ships_by_type[1][0].extend(ships_type1_X)
+    ships_by_type[1][1].extend(ships_type1_Y)
+
+    ships_by_type[2][0].extend(ships_type2_X)
+    ships_by_type[2][1].extend(ships_type2_Y)
+
+
 all_sim_mean =  sum(sims)/len(sims)
 print("All simulations mean : ",all_sim_mean)
+print("Min : ",min(sims),"Max : ", max(sims))
+
+mean0X = sum(ships_by_type[0][0])/len(ships_by_type[0][0])
+mean1X = sum(ships_by_type[1][0])/len(ships_by_type[1][0])
+mean2X = sum(ships_by_type[2][0])/len(ships_by_type[2][0])
+
+mean0Y = sum(ships_by_type[0][1])/len(ships_by_type[0][1])
+mean1Y = sum(ships_by_type[1][1])/len(ships_by_type[1][1])
+mean2Y = sum(ships_by_type[2][1])/len(ships_by_type[2][1])
+
+
+plt.plot(X, Y, "b.", label="barcos")
+plt.plot([mean2X for _ in range(len(sims))],sims,"m.",label="media de cada simulacion")
+plt.plot([mean0X, mean1X, mean2X], [mean0Y, mean1Y, mean2Y], "ys",label="media por tipo de barco")
+plt.plot(mean1X, all_sim_mean, "r.", label="media general")
+plt.xlabel("tiempo de salida del puerto (horas)")
+plt.ylabel("tiempo de espera (horas)" )
+plt.legend()
+plt.show()

@@ -18,5 +18,7 @@ def normal_random_variable(mu,sigma):
     """
     Use the uniform distribution to generate a random variable with normal distribution
     """
-    uniform = U(0,1)()
-    return lambda : mu + sigma*m.sqrt(-2*m.log(uniform))*m.cos(2*m.pi*uniform)
+    u1 = U(0,1)
+    u2 = U(0,1)
+    return lambda : mu + sigma*m.sqrt(-2*m.log(u1()))*m.cos(2*m.pi*u2())
+    #return lambda :r.normalvariate(mu,sigma)
